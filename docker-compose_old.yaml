@@ -35,26 +35,12 @@ services:
     env_file:
       - .env
   classifier:
-    build: ./docker/classifier
-    container_name: digital_twin_classifier
-    ports:
-      - 5000:80
-    volumes:
-      - ./static:/data/dataset-path
-    networks:
-      - node_network
-    env_file:
-      - .env
-    depends_on:
-      - openpointclass
-  openpointclass:
-    # image: uav4geo/openpointclass:latest
-    build: https://github.com/uav4geo/OpenPointClass.git
+    image: uav4geo/openpointclass:latest
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    container_name: digital_twin_openpointclass
+    container_name: openpointclass
     volumes:
-      - ./static:/data/dataset-path
+      - ./:/data/dataset-path
     networks:
       - node_network
     env_file:
